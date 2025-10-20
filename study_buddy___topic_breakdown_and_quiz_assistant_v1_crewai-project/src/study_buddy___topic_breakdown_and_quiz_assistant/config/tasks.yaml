@@ -1,0 +1,40 @@
+---
+break_down_study_topic:
+  description: 'Research and break down the study topic "{topic}" in {subject} into
+    digestible learning chunks. Create a hierarchical structure starting with foundational
+    concepts and progressing to more advanced topics. Each chunk should include: key
+    concepts, learning objectives, prerequisite knowledge, and estimated study time.
+    Research current information to ensure accuracy and completeness.'
+  expected_output: A structured breakdown of "{topic}" organized into 5-8 digestible
+    learning chunks, each with clear learning objectives, key concepts, prerequisites,
+    and estimated study time. Include relevant examples and connections between chunks.
+  agent: topic_breakdown_specialist
+generate_quiz_questions:
+  description: 'Based on the structured learning chunks provided, create a comprehensive
+    set of quiz questions for "{topic}" in {subject}. Generate 3-5 questions per chunk
+    at different difficulty levels: basic (recall), intermediate (comprehension/application),
+    and advanced (analysis/evaluation). Include multiple choice questions with 4 options
+    each, ensuring incorrect options are plausible but clearly wrong. Provide correct
+    answers and brief explanations.'
+  expected_output: 'A comprehensive quiz set with 20-30 questions covering all learning
+    chunks of "{topic}". Each question should include: the question text, 4 multiple
+    choice options (A, B, C, D), correct answer, difficulty level, and a brief explanation
+    of why the answer is correct.'
+  agent: quiz_creator
+  context:
+  - break_down_study_topic
+compile_complete_study_guide:
+  description: Create a comprehensive, well-formatted study guide for "{topic}" in
+    {subject} that combines the structured learning chunks with the quiz questions.
+    Organize the content in a logical flow that supports effective studying. Include
+    study tips, a recommended study schedule, and interactive elements. Format the
+    guide with clear headings, bullet points, and visual elements to enhance readability
+    and engagement.
+  expected_output: 'A complete, professionally formatted study guide in markdown format
+    that includes: structured learning chunks, integrated quiz questions, study tips,
+    recommended study schedule (with time estimates), review strategies, and a summary
+    section. The guide should be ready for immediate use by students.'
+  agent: study_guide_compiler
+  context:
+  - break_down_study_topic
+  - generate_quiz_questions
